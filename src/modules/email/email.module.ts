@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { EmailController } from './email.controller';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { Partitioners } from 'kafkajs';
+import { Nodemail } from 'src/shared/services/email/Nodemail';
 
 @Module({
     imports: [
@@ -25,6 +26,6 @@ import { Partitioners } from 'kafkajs';
         ]),
     ],
     controllers: [EmailController],
-    providers: [],
+    providers: [Nodemail],
 })
 export class EmailModule {}
