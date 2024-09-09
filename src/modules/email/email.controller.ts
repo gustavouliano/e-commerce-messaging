@@ -1,14 +1,14 @@
 import { Controller, Inject } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
-import { Nodemail } from 'src/shared/services/email/Nodemail';
+import { EmailVerification } from './messages/EmailVerification';
+import { EmailVerificationUseCase } from './use-cases/email-verification.use-case';
 
 @Controller()
 export class EmailController {
-    constructor(@Inject() private readonly mailService: Nodemail) {}
+    constructor(@Inject() private readonly emailVerificationUseCase: EmailVerificationUseCase) {}
 
-    @MessagePattern('product-topic')
-    sendEmail(@Payload() message: any) {
-        console.log(message);
-        this.mailService.sendEmail('gustavouliano11@gmail.com', 'assunto 1', 'teste conteúdo<br/><h1>teste h1</h1>');
+    @MessagePattern('email-user-verification-topic')
+    sendEmail(@Payload() message: EmailVerification) {
+        return this.emailVerificationUseCase.execute(message);
     }
 }

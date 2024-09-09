@@ -3,6 +3,7 @@ import { EmailController } from './email.controller';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { Partitioners } from 'kafkajs';
 import { Nodemail } from 'src/shared/services/email/Nodemail';
+import { EmailVerificationUseCase } from './use-cases/email-verification.use-case';
 
 @Module({
     imports: [
@@ -26,6 +27,6 @@ import { Nodemail } from 'src/shared/services/email/Nodemail';
         ]),
     ],
     controllers: [EmailController],
-    providers: [Nodemail],
+    providers: [Nodemail, EmailVerificationUseCase],
 })
 export class EmailModule {}

@@ -16,13 +16,11 @@ export class Nodemail {
                 pass: process.env.MAIL_PASS,
             },
         });
-        transporter.sendMail(mailOptions, (error, info) => {
+        transporter.sendMail(mailOptions, (error) => {
             if (error) {
                 console.log(error);
                 return error;
             }
-            console.log(info);
-            console.log('Email enviado com sucesso');
         });
     }
 }
